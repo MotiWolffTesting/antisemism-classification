@@ -59,21 +59,21 @@ class DataAnalyzer:
         }
         
     def find_longest_tweets(self) -> Dict[str, List[str]]:
-        "Find 3 longest tweets by category"
+        "Find 3 longest tweets by category (based on character count)"
         if self.data is None:
             raise ValueError(NOT_LOADED)
         
-        # Calculate word count if not already done
-        if 'word_count' not in self.data.columns:
-            self.data['word_count'] = self.data['text'].str.split().str.len()
+        # Calculate character count if not already done
+        if 'char_count' not in self.data.columns:
+            self.data['char_count'] = self.data['text'].str.len()
             
-        # Get longest tweet for each category
-        antesimitism_longest = self.data[self.data['biased'] == 1].nlargest(3, 'word_count')['text'].tolist()
-        non_antesimitism_longest = self.data[self.data['biased'] == 0].nlargest(3, 'word_count')['text'].tolist()
+        # Get longest tweet for each category (by character count)
+        antisemitism_longest = self.data[self.data['biased'] == 1].nlargest(3, 'char_count')['text'].tolist()
+        non_antisemitism_longest = self.data[self.data['biased'] == 0].nlargest(3, 'char_count')['text'].tolist()
         
         return {
-            "antisemitism": antesimitism_longest,
-            "non-antisemitism": non_antesimitism_longest
+            "antisemitism": antisemitism_longest,
+            "non-antisemitism": non_antisemitism_longest
         }
         
     def get_common_words(self, top_n: int = 10) -> Dict[str, Dict[str, List]]:
@@ -131,11 +131,11 @@ class DataAnalyzer:
             "longest_three_tweets": self.find_longest_tweets(),
             "uppercase_words": self.count_uppercase_words()
         }
-        
-        
-    
-    
-        
-        
-        
+
+
+
+
+
+
+
 
