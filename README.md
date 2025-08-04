@@ -14,20 +14,22 @@ This project takes a dataset of tweets and performs analysis to understand patte
 - **Data Export**: Saves cleaned datasets and analysis results
 
 ## Project Structure
+```
 antisemism-classification/
 ├── data/
-│ └── tweets_dataset.csv # Input dataset
+│   └── tweets_dataset.csv           # Input dataset
 ├── src/
-│ ├── main.py # Main execution script
-│ ├── data_analyzer.py # Core analysis functionality
-│ ├── data_loader.py # Data loading utilities
-│ ├── text_cleaner.py # Text preprocessing
-│ ├── report_builder.py # Report generation
-│ ├── report_displayer.py # Report display utilities
-│ └── report_manager.py # Report management
+│   ├── main.py                      # Main execution script
+│   ├── data_analyzer.py             # Core analysis functionality
+│   ├── data_loader.py               # Data loading utilities
+│   ├── text_cleaner.py              # Text preprocessing
+│   ├── report_builder.py            # Report generation
+│   ├── report_displayer.py          # Report display utilities
+│   └── report_manager.py            # Report management
 └── results/
-├── results.json # Analysis results
-└── tweets_dataset_cleaned.csv # Cleaned dataset
+    ├── results.json                 # Analysis results
+    └── tweets_dataset_cleaned.csv   # Cleaned dataset
+```
 
 ## Usage
 
