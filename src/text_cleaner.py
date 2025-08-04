@@ -13,28 +13,28 @@ class TextCleaner:
         
     def filter_relevant_columns(self) -> None:
         "Keep only relevant columns, 'text' and 'biased'"
-        if 'text' in self.original_data.columns and 'biased' in self.original_data.columns:
-            self.cleaned_data = self.original_data[['text', 'biased']].copy()
+        if 'Text' in self.original_data.columns and 'Biased' in self.original_data.columns:
+            self.cleaned_data = self.original_data[['Text', 'Biased']].copy()
             print(f"Filtered to relevant columns. Shape: {self.cleaned_data.shape}")
         else:
-            raise ValueError("Required columns 'text' and 'biased' not found in dataset")
+            raise ValueError("Required columns 'Text' and 'Biased' not found in dataset")
         
-    def remove_unclassifed_tweets(self) -> None:
-        "Remove tweets that doesnt have proper classification (0 or 1)"
+    def remove_unclassified_tweets(self) -> None:
+        "Remove tweets that don't have proper classification (0 or 1)"
         if self.cleaned_data is None:
             self.filter_relevant_columns()
         if self.cleaned_data is None:
             raise ValueError("cleaned_data is still None after attempting to filter relevant columns.")
             
         # Keep tweets with proper classification
-        valid_mask = self.cleaned_data['biased'].isin([0, 1])
+        valid_mask = self.cleaned_data['Biased'].isin([0, 1])
         self.cleaned_data = self.cleaned_data[valid_mask].copy()
         
         removed_count = len(self.original_data) - len(self.cleaned_data)
         print(f"Removed {removed_count} unclassified tweets. Remaining: {len(self.cleaned_data)}")
         
-    def remove_punctuations(self, text: str) -> str:
-        "Remove punctuations from text"
+    def remove_punctuation(self, text: str) -> str:
+        "Remove punctuation from text"
         return text.translate(str.maketrans('', '', string.punctuation))
     
     def convert_to_lowercase(self, text: str) -> str:
@@ -49,8 +49,8 @@ class TextCleaner:
         # Convert to string if not already
         text = str(text)
         
-        # Remove punctuations
-        text = self.remove_punctuations(text)
+        # Remove punctuation
+        text = self.remove_punctuation(text)
         
         # Convert to lowercase
         text = self.convert_to_lowercase(text)
@@ -68,13 +68,13 @@ class TextCleaner:
             raise ValueError("cleaned_data is still None after attempting to filter relevant columns.")
         
         self.filter_relevant_columns()
-        self.remove_unclassifed_tweets()
+        self.remove_unclassified_tweets()
         
         # Apply cleaning to all tweets
-        self.cleaned_data['text'] = self.cleaned_data['text'].apply(self.clean_text)
+        self.cleaned_data['Text'] = self.cleaned_data['Text'].apply(self.clean_text)
         
         # Remove empty tweets after cleaning
-        self.cleaned_data = self.cleaned_data[self.cleaned_data['text'].str.len() > 0].copy()
+        self.cleaned_data = self.cleaned_data[self.cleaned_data['Text'].str.len() > 0].copy()
         
         print(f"Dataset cleaning completed. Final shape: {self.cleaned_data.shape}")
         return self.cleaned_data

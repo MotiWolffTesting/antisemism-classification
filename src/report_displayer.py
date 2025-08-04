@@ -15,27 +15,27 @@ class ReportDisplayer:
         # Tweet distribution
         total_tweets = results["total_tweets"]
         print(f"Total tweets analyzed: {total_tweets['total']}")
-        print(f"Antisemitic tweets: {total_tweets['antisemitism']}")
-        print(f"Non-antisemitic tweets: {total_tweets['non_antisemitism']}")
+        print(f"Antisemitic tweets: {total_tweets['antisemitic']}")
+        print(f"Non-antisemitic tweets: {total_tweets['non_antisemitic']}")
         if 'unspecified' in total_tweets:
             print(f"Unspecified tweets: {total_tweets['unspecified']}")
         
         # Average lengths
         avg_lengths = results["average_length"]
         print("\nAverage tweet lengths:")
-        print(f"Antisemitic: {avg_lengths['antisemitism']} words")
-        print(f"Non-antisemitic: {avg_lengths['non_antisemitism']} words")
+        print(f"Antisemitic: {avg_lengths['antisemitic']} words")
+        print(f"Non-antisemitic: {avg_lengths['non_antisemitic']} words")
         print(f"Overall: {avg_lengths['total']} words")
         
         # Common words
-        common_words = results["common_words"]["total"]["words"]
+        common_words = results["common_words"]["total"]
         print(f"\nTop {len(common_words)} common words: {', '.join(common_words)}")
         
         # Uppercase words
         uppercase = results["uppercase_words"]
         print("\nUppercase words:")
-        print(f"Antisemitic: {uppercase['antisemitism']}")
-        print(f"Non-antisemitic: {uppercase['non_antisemitism']}")
+        print(f"Antisemitic: {uppercase['antisemitic']}")
+        print(f"Non-antisemitic: {uppercase['non_antisemitic']}")
         print(f"Total: {uppercase['total']}")
         
         print("="*50)
@@ -50,7 +50,7 @@ class ReportDisplayer:
         longest_tweets = results["longest_3_tweets"]
         
         print("\nAntisemitic (top 3):")
-        antisemitic_tweets = longest_tweets["antisemitism"]
+        antisemitic_tweets = longest_tweets["antisemitic"]
         for i in range(len(antisemitic_tweets)):
             tweet = antisemitic_tweets[i]
             if len(tweet) > 80:
@@ -58,7 +58,7 @@ class ReportDisplayer:
             print(f"{i+1}. {tweet}")
         
         print("\nNon-antisemitic (top 3):")
-        non_antisemitic_tweets = longest_tweets["non-antisemitism"]
+        non_antisemitic_tweets = longest_tweets["non_antisemitic"]
         for i in range(len(non_antisemitic_tweets)):
             tweet = non_antisemitic_tweets[i]
             if len(tweet) > 80:
