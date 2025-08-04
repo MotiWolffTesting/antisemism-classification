@@ -1,3 +1,5 @@
 venv
 
 guidelines.pdf
+
+__pycache__
