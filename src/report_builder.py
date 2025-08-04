@@ -72,7 +72,7 @@ class ReportBuilder:
                 return False
         
         # Validate longest_3_tweets structure
-        longest_keys = ["antisemitism", "non-antisemitism"]
+        longest_keys = ["antisemitic", "non_antisemitic"]
         for key in longest_keys:
             if key not in results["longest_3_tweets"]:
                 print(f"Missing key in longest_3_tweets: {key}")
